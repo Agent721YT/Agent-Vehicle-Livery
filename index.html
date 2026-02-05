@@ -3,37 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGENT STUDIO | 特工載具塗裝</title>
+    <title>AGENT VEHICLE LIVERY | 特工載具塗裝</title>
     <style>
-        :root { --primary-cyan: #00f2ff; --bg-black: #0a0a0a; --card-bg: #151515; --text-gray: #a0a0a0; }
-        body { background-color: var(--bg-black); color: white; font-family: sans-serif; margin: 0; line-height: 1.6; }
-        .top-bar { height: 4px; background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent); }
-        header { text-align: center; padding: 60px 20px; }
-        h1 { letter-spacing: 8px; font-size: 2.5rem; text-shadow: 0 0 15px var(--primary-cyan); margin: 0; }
-        .subtitle { color: var(--primary-cyan); font-size: 0.9rem; letter-spacing: 4px; margin-top: 10px; }
-        .team-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 40px 10%; }
-        .member-card { background: var(--card-bg); border: 1px solid #222; padding: 25px; border-radius: 4px; }
-        .member-card:hover { border-color: var(--primary-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
-        .role { color: var(--primary-cyan); font-size: 0.8rem; font-weight: bold; display: block; }
-        .name { font-size: 1.4rem; font-weight: bold; display: block; margin: 10px 0; }
-        .desc { color: var(--text-gray); font-size: 0.85rem; }
-        footer { text-align: center; padding: 50px; color: #444; font-size: 0.8rem; }
-        .status-blink { display: inline-block; width: 8px; height: 8px; background-color: var(--primary-cyan); border-radius: 50%; margin-right: 8px; animation: blink 1.5s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        :root {
+            --cyan: #00f2ff;
+            --dark-bg: #050505;
+            --card-bg: rgba(20, 20, 20, 0.9);
+            --border-color: rgba(0, 242, 255, 0.3);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #e0e0e0;
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            margin: 0;
+            line-height: 1.7;
+            background-image: radial-gradient(circle at 50% 50%, #101010 0%, #050505 100%);
+        }
+
+        /* 霓虹發光標題區 */
+        header {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 2px solid var(--cyan);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+            background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.05));
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 15px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--cyan), 0 0 20px var(--cyan);
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            color: var(--cyan);
+            letter-spacing: 5px;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .container { max-width: 1100px; margin: auto; padding: 60px 20px; }
+
+        /* 區塊標題 */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--cyan);
+            margin: 0 20px 0 0;
+            white-space: nowrap;
+        }
+
+        .section-line { height: 1px; background: var(--border-color); width: 100%; }
+
+        /* 團隊成員卡片 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 4px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
+        }
+
+        .card b { color: var(--cyan); font-size: 0.8rem; display: block; margin-bottom: 5px; }
+        .card .name { font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; display: block; }
+        .card p { font-size: 0.9rem; color: #aaa; }
+
+        /* 規則區塊 */
+        .rule-list {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--cyan);
+            padding: 30px;
+            margin-bottom: 60px;
+        }
+
+        .rule-item { margin-bottom: 15px; display: flex; align-items: flex-start; }
+        .rule-item::before { content: "»"; color: var(--cyan); margin-right: 10px; font-weight: bold; }
+
+        /* 頁尾 */
+        footer {
+            text-align: center;
+            padding: 80px 20px;
+            background: #000;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border-top: 1px solid #222;
+        }
+
+        .warning-text { color: #666; font-size: 0.75rem; max-width: 600px; margin: 20px auto; }
+        
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--cyan);
+            color: #000;
+            font-weight: bold;
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class="top-bar"></div>
-    <header>
-        <h1>AGENT STUDIO</h1>
-        <div class="subtitle">EXTREME VEHICLE LIVERY WORKS</div>
-    </header>
-    <div class="team-container">
-        <div class="member-card"><span class="role">執行長 CEO</span><span class="name">特工721</span><p class="desc">負責工作室總體發展規劃、技術研發與最終品質審核。</p></div>
-        <div class="member-card"><span class="role">行政總監 CAO</span><span class="name">哈茲</span><p class="desc">負責委託流程管理、合約規則與財務核算，維持日常運作。</p></div>
-        <div class="member-card"><span class="role">線上資訊監察官</span><span class="name">Caspar</span><p class="desc">專職知識產權保護與外流追蹤，確保商城資源獨特性。</p></div>
-        <div class="member-card"><span class="role">部門經理 DM</span><span class="name">Hei0409</span><p class="desc">負責製作部門進度調度與品質監督，確保各項委託準時完成。</p></div>
+
+<header>
+    <div class="badge">EST. 2026</div>
+    <h1 class="hero-title">AGENT STUDIO</h1>
+    <div class="hero-subtitle">AGENT VEHICLE LIVERY - EXTREME DESIGN</div>
+</header>
+
+<div class="container">
+    
+    <div class="section-header">
+        <h2>核心經營團隊</h2>
+        <div class="section-line"></div>
     </div>
-    <footer><p><span class="status-blink"></span>SYSTEM STATUS: SECURE / 2026 AGENT VEHICLE LIVERY</p></footer>
+    
+    <div class="grid">
+        <div class="card">
+            <b>CEO / 執行長</b>
+            <span class="name">特工 721</span>
+            <p>負責工作室總體發展規劃、技術研發與最終作品品質審核，確保每一項產出皆符合頂尖標準。</p>
+        </div>
+        <div class="card">
+            <b>CAO / 行政總監</b>
+            <span class="name">哈茲 (Haz)</span>
+            <p>負責委託流程管理、價格核算與合約規則制定。是客戶與工作室之間最主要的溝通橋樑。</p>
+        </div>
+        <div class="card">
+            <b>IOO / 資訊監察官</b>
+            <span class="name">Caspar</span>
+            <p>專職知識產權保護、外流追蹤與版權監督。嚴厲打擊非法盜用，確保商城資源的唯一性。</p>
+        </div>
+        <div class="card">
+            <b>DM / 部門經理</b>
+            <span class="name">Hei0409</span>
+            <p>負責製作進度調度與技術監督，確保委託項目在約定時間內以最完美的姿態交付。</p>
+        </div>
+    </div>
+
+    <div class="section-header">
+        <h2>委託協議與守則</h2>
+        <div class="section-line"></div>
+    </div>
+
+    <div class="rule-list">
+        <div class="rule-item">本工作室所有塗裝作品受版權保護，嚴禁未經授權的轉售、倒賣或二次分發。</div>
+        <div class="rule-item">委託人需配合行政總監哈茲進行排單登記，並先行提供設計需求與參考資料。</div>
+        <div class="rule-item">製作期間，執行長保有對設計細節最終調整的權利，以確保成品美感。</div>
+        <div class="rule-item">若發現任何侵權或外流行為，監察官 Caspar 將立即採取法律手段並永久列入黑名單。</div>
+    </div>
+
+    <div class="section-header">
+        <h2>WORKFLOW 流程</h2>
+        <div class="section-line"></div>
+    </div>
+    <p style="text-align: center; color: var(--cyan); font-weight: bold; letter-spacing: 2px;">
+        諮詢申請 → 需求審核 → 合約確認 → 開始製作 → 品質檢驗 → 交付成品
+    </p>
+
+</div>
+
+<footer>
+    <div>AGENT VEHICLE LIVERY OFFICIAL SITE</div>
+    <div class="warning-text">
+        本站所有內容受 AGENT STUDIO 監管。未經授權禁止轉載或複製。
+        監察官：Caspar | 系統狀態：穩定運行
+    </div>
+    <div style="color: #444; margin-top: 20px;">&copy; 2026 AGENT STUDIO. ALL RIGHTS RESERVED.</div>
+</footer>
+
 </body>
 </html>
