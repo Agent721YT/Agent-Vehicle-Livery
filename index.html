@@ -3,153 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGENT VEHICLE LIVERY | 特工車輛塗裝</title>
+    <title>AGENT VEHICLE LIVERY | 官網</title>
     <style>
-        :root { --main-blue: #0047ba; --light-blue: #e8f0fe; --border-gray: #ddd; }
+        :root {
+            --sidebar-width: 240px;
+            --agent-blue: #0066ff;
+            --text-dark: #1a1a1a;
+            --bg-gray: #f5f7f9;
+        }
+
         * { box-sizing: border-box; }
-        body { font-family: "Microsoft JhengHei", sans-serif; margin: 0; display: flex; background: #fff; color: #333; }
+        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; margin: 0; background: #fff; color: var(--text-dark); display: flex; }
 
         /* 左側導航欄 */
-        nav {
-            width: 220px;
+        .sidebar {
+            width: var(--sidebar-width);
             height: 100vh;
-            border-right: 1px solid var(--border-gray);
+            border-right: 1px solid #e0e0e0;
             position: fixed;
-            padding: 20px 0;
             background: #fff;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            z-index: 100;
         }
-        .logo-area { padding: 0 15px 20px; border-bottom: 1px solid var(--border-gray); margin-bottom: 15px; }
-        .logo-area img { width: 100%; }
+
+        .sidebar-logo {
+            padding: 0 25px 20px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: #000;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-group { margin-top: 20px; }
+        .nav-label { font-size: 0.75rem; color: #999; padding: 0 25px; margin-bottom: 10px; font-weight: bold; }
         
-        .nav-group { margin-bottom: 20px; }
-        .nav-title { font-size: 12px; font-weight: bold; padding: 0 15px; margin-bottom: 8px; color: #000; }
-        .nav-item { 
-            display: block; padding: 8px 30px; text-decoration: none; color: #666; font-size: 14px; transition: 0.3s;
+        .nav-item {
+            display: block;
+            padding: 12px 25px;
+            text-decoration: none;
+            color: #444;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            cursor: pointer;
         }
-        .nav-item:hover { background: var(--light-blue); color: var(--main-blue); }
-        .nav-item.active { background: var(--light-blue); color: var(--main-blue); border-right: 4px solid var(--main-blue); }
+
+        .nav-item:hover { background: #f0f4ff; color: var(--agent-blue); }
+        .nav-item.active { background: #e8f0fe; color: var(--agent-blue); border-right: 4px solid var(--agent-blue); font-weight: bold; }
 
         /* 右側內容區 */
-        main { margin-left: 220px; flex: 1; padding: 40px; }
-        section { display: none; max-width: 900px; margin: auto; animation: fadeIn 0.5s; }
+        .content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 60px 80px;
+            min-height: 100vh;
+        }
+
+        section { display: none; max-width: 800px; animation: slideIn 0.3s ease-out; }
         section.active { display: block; }
 
-        .banner { width: 100%; border: 5px solid #000; border-radius: 15px; margin-bottom: 30px; }
-        
-        h1 { font-size: 32px; border-bottom: 3px solid #000; padding-bottom: 10px; margin-bottom: 25px; }
-        p { line-height: 1.8; font-size: 18px; white-space: pre-line; }
-
-        /* 圖片排列樣式 */
-        .image-stack { display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
-        .image-stack img { 
-            width: 250px; border-radius: 5px; box-shadow: 10px 10px 20px rgba(0,0,0,0.2); 
-            transition: 0.3s;
-        }
-        .image-stack img:hover { transform: translateY(-10px); }
-
-        /* 團隊樣式 */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; text-align: center; }
-        .member-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; }
-        .member-card h3 { color: #00a2ff; margin: 10px 0 5px; }
-        .member-card .role { font-weight: bold; font-size: 14px; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
-</head>
-<body>
-
-<nav>
-    <div class="logo-area"><img src="https://via.placeholder.com/150x50?text=AGENT+LOGO" alt="LOGO"></div>
-    
-    <div class="nav-group">
-        <div class="nav-title">品牌資訊</div>
-        <a href="#" class="nav-item active" onclick="showSection('intro')">介紹</a>
-    </div>
-
-    <div class="nav-group">
-        <div class="nav-title">服務內容</div>
-        <a href="#" class="nav-item" onclick="showSection('livery')">車輛塗裝</a>
-        <a href="#" class="nav-item" onclick="showSection('lights')">公務車警示燈</a>
-        <a href="#" class="nav-item" onclick="showSection('clothing')">經典上衣/褲</a>
-    </div>
-
-    <div class="nav-group">
-        <div class="nav-title">客戶專區</div>
-        <a href="#" class="nav-item" onclick="showSection('payment')">交易方式</a>
-        <a href="#" class="nav-item" onclick="showSection('price')">商品價目表</a>
-        <a href="#" class="nav-item" onclick="showSection('order')">商品下單</a>
-    </div>
-
-    <div class="nav-group">
-        <div class="nav-title">會員福利</div>
-        <a href="#" class="nav-item" onclick="showSection('gold')">黃金會員</a>
-        <a href="#" class="nav-item" onclick="showSection('diamond')">鑽石會員</a>
-    </div>
-
-    <div class="nav-group">
-        <div class="nav-title">合作夥伴</div>
-        <a href="#" class="nav-item" onclick="showSection('team')">主要團隊經營者</a>
-    </div>
-</nav>
-
-<main>
-    <section id="intro" class="active">
-        <img src="https://via.placeholder.com/800x200/000/fff?text=Agent+Vehicle+Livery+Banner" class="banner">
-        <h1>介紹</h1>
-        <p>特工車輛塗裝專注於高品質的客製化繪圖服務
-        我們主要致力於將真實各種車輛細節移植至ERLC
-        確保每一份設計均符合規格...</p>
-    </section>
-
-    <section id="livery">
-        <h1>車輛塗裝</h1>
-        <p>車輛塗裝設計專注於完全客製
-        涵蓋警察、消防、救護、交通局及所有民間職業全系列車型...</p>
-        <div class="image-stack">
-            <img src="https://via.placeholder.com/300x200?text=Car+1" alt="作品">
-            <img src="https://via.placeholder.com/300x200?text=Car+2" alt="作品">
-        </div>
-    </section>
-
-    <section id="team">
-        <h1 style="text-align: center; border: none;">主要團隊經營者</h1>
-        <div class="team-grid">
-            <div class="member-card">
-                <img src="https://via.placeholder.com/120?text=721" alt="特工721">
-                <h3>特工721</h3>
-                <div class="role">執行長 兼 塗裝師</div>
-                <p style="font-size: 12px;">掌握委託項目最終決策</p>
-            </div>
-            <div class="member-card">
-                <img src="https://via.placeholder.com/120?text=Haz" alt="哈茲">
-                <h3>哈茲</h3>
-                <div class="role">行政總監</div>
-                <p style="font-size: 12px;">第一線接洽人員</p>
-            </div>
-            </div>
-    </section>
-
-    <section id="price">
-        <h1>商品價目表</h1>
-        <div style="background: #0004ff; color: white; padding: 40px; border-radius: 10px;">
-            <h2>特工車輛塗裝公司 商品價目表</h2>
-            <p>警察車：$55 ROBUX<br>消防車：$40 ROBUX<br>...</p>
-        </div>
-    </section>
-</main>
-
-<script>
-    function showSection(id) {
-        // 隱藏所有 section
-        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-        // 顯示點選的 section
-        document.getElementById(id).classList.add('active');
-        // 更新選單樣式
-        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-    }
-</script>
-
-</body>
-</html>
+        .banner {
+            width: 100%;
+            height: 250px;
+            background: #000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size:
