@@ -3,73 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGENT VEHICLE LIVERY | 官網</title>
+    <title>AGENT VEHICLE LIVERY | 官方網站</title>
     <style>
-        :root {
-            --sidebar-width: 240px;
-            --agent-blue: #0066ff;
-            --text-dark: #1a1a1a;
-            --bg-gray: #f5f7f9;
-        }
-
+        /* 基本設定 */
         * { box-sizing: border-box; }
-        body { font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; margin: 0; background: #fff; color: var(--text-dark); display: flex; }
+        body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; margin: 0; display: flex; background-color: #ffffff; height: 100vh; overflow: hidden; }
 
-        /* 左側導航欄 */
+        /* 左側固定選單欄 */
         .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            border-right: 1px solid #e0e0e0;
-            position: fixed;
-            background: #fff;
+            width: 260px;
+            background: #ffffff;
+            border-right: 1px solid #e5e5e5;
             display: flex;
             flex-direction: column;
-            padding: 20px 0;
-            z-index: 100;
+            overflow-y: auto;
         }
 
-        .sidebar-logo {
-            padding: 0 25px 20px;
-            font-weight: 900;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            color: #000;
-            border-bottom: 1px solid #eee;
+        .sidebar-header {
+            padding: 30px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .sidebar-header img { width: 100%; max-width: 180px; }
+
+        .nav-section { padding: 20px 0; }
+        .nav-group-title {
+            padding: 0 25px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
-        .nav-group { margin-top: 20px; }
-        .nav-label { font-size: 0.75rem; color: #999; padding: 0 25px; margin-bottom: 10px; font-weight: bold; }
-        
-        .nav-item {
+        .nav-link {
             display: block;
-            padding: 12px 25px;
-            text-decoration: none;
+            padding: 10px 25px;
             color: #444;
-            font-size: 0.95rem;
-            transition: 0.2s;
+            text-decoration: none;
+            font-size: 14px;
             cursor: pointer;
+            transition: all 0.2s;
         }
+        .nav-link:hover { background: #f8f9fa; color: #005cff; }
+        .nav-link.active { background: #eef4ff; color: #005cff; border-right: 3px solid #005cff; font-weight: bold; }
 
-        .nav-item:hover { background: #f0f4ff; color: var(--agent-blue); }
-        .nav-item.active { background: #e8f0fe; color: var(--agent-blue); border-right: 4px solid var(--agent-blue); font-weight: bold; }
-
-        /* 右側內容區 */
-        .content {
-            margin-left: var(--sidebar-width);
+        /* 右側主內容區 */
+        .main-container {
             flex: 1;
-            padding: 60px 80px;
-            min-height: 100vh;
+            height: 100vh;
+            overflow-y: auto;
+            position: relative;
         }
 
-        section { display: none; max-width: 800px; animation: slideIn 0.3s ease-out; }
-        section.active { display: block; }
+        /* 內容顯示區塊 */
+        .page-content {
+            display: none;
+            padding: 40px 60px;
+            max-width: 1000px;
+        }
+        .page-content.active { display: block; }
 
-        .banner {
+        /* Banner 樣式 */
+        .top-banner {
             width: 100%;
-            height: 250px;
-            background: #000;
+            height: 220px;
+            background-color: #000;
             border-radius: 12px;
+            margin-bottom: 40px;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(45deg, #000 30%, #1a1a1a 100%);
+            color: white;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+
+        /* 標題與文字樣式 */
+        h1 { font-size: 38px; color: #000; margin: 0 0 20px 0; border-bottom: 5px solid #000; display: inline-block; padding-bottom: 5px; }
+        p { font-size: 18px; line-height: 1.8; color: #222; white-space: pre-line; margin-bottom: 30px; }
+
+        /* 圖片展示牆樣式 (疊加陰影) */
+        .img-gallery { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+        .img-item {
+            width: 280px; height: 180px; background: #eee; border-radius: 8px;
+            box-shadow: 8px 8px 24px rgba(0,0,0,0.1); transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; font-size: 14px; color: #888;
+        }
+        .img-item
             align-items: center;
             justify-content: center;
             color: #fff;
